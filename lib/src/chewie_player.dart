@@ -79,14 +79,38 @@ class ChewieState extends State<Chewie> {
       BuildContext context,
       Animation<double> animation,
       _ChewieControllerProvider controllerProvider) {
-    return Scaffold(
-      resizeToAvoidBottomPadding: false,
-      body: Container(
-        alignment: Alignment.center,
-        color: Colors.black,
-        child: controllerProvider,
-      ),
-    );
+    return WillPopScope(
+      onWillPop: () {
+        Navigator.of(context).pushNamedAndRemoveUntil(widget.controller.fromRoute, (Route<dynamic> route) => false);
+      },
+      child: Scaffold(
+        appBar: AppBar (
+        iconTheme: IconThemeData(
+            color: Color.fromRGBO(255, 255, 255, 1.0)),
+        actionsIconTheme: IconThemeData(
+            color: Color.fromRGBO(255, 255, 255, 1.0)),
+        automaticallyImplyLeading: true,
+        elevation: 0.1,
+        backgroundColor: Color.fromRGBO(0, 0, 0, 1.0),
+        title: Text(
+          widget.controller.title,
+          style: TextStyle(
+            fontFamily: "MMCOFFICE-Regular", fontWeight: FontWeight.w700),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pushNamedAndRemoveUntil(widget.controller.fromRoute, (Route<dynamic> route) => false);
+          },
+          icon: Icon(Icons.arrow_back),
+          ),
+        ),
+        resizeToAvoidBottomPadding: false,
+        body: Container(
+          alignment: Alignment.center,
+          color: Colors.black,
+          child: controllerProvider,
+        ),
+    ));
   }
 
   AnimatedWidget _defaultRoutePageBuilder(
@@ -185,6 +209,8 @@ class ChewieController extends ChangeNotifier {
     this.isLive = false,
     this.allowFullScreen = true,
     this.allowMuting = true,
+    this.title = "Default",
+    this.fromRoute,
     this.systemOverlaysAfterFullScreen = SystemUiOverlay.values,
     this.deviceOrientationsAfterFullScreen = const [
       DeviceOrientation.portraitUp,
@@ -262,6 +288,11 @@ class ChewieController extends ChangeNotifier {
 
   /// Defines if the mute control should be shown
   final bool allowMuting;
+
+  // Defines title
+  final String title;
+
+  final String fromRoute;
 
   /// Defines the system overlays visible after exiting fullscreen
   final List<SystemUiOverlay> systemOverlaysAfterFullScreen;
