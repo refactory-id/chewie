@@ -75,13 +75,20 @@ class ChewieState extends State<Chewie> {
     );
   }
 
+  void exitAndBack() {
+    Navigator.of(context).pushNamedAndRemoveUntil(widget.controller.fromRoute, ModalRoute.withName(widget.controller.fromRoute));
+    Navigator.of(context).pop();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  }
+
   Widget _buildFullScreenVideo(
       BuildContext context,
       Animation<double> animation,
       _ChewieControllerProvider controllerProvider) {
     return WillPopScope(
       onWillPop: () {
-        Navigator.of(context).pushNamedAndRemoveUntil(widget.controller.fromRoute, (Route<dynamic> route) => false);
+        exitAndBack();
+        return Future<bool>.value(false);
       },
       child: Scaffold(
         appBar: AppBar (
@@ -99,7 +106,7 @@ class ChewieState extends State<Chewie> {
         ),
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(widget.controller.fromRoute, (Route<dynamic> route) => false);
+            exitAndBack();
           },
           icon: Icon(Icons.arrow_back),
           ),
