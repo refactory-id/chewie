@@ -189,11 +189,11 @@ class _MaterialControlsState extends State<MaterialControls> {
               SizedBox(width: MediaQuery.of(context).size.height * 0.1),
               IconButton(
                   icon: Icon(Icons.arrow_back_ios),
-                  color: Colors.white60,
+                  color: Colors.white70,
                   onPressed: exitAndBack),
               Text(
                 chewieController.title,
-                style: TextStyle(color: Colors.white60, fontSize: 20),
+                style: TextStyle(color: Colors.white70, fontSize: 20),
               )
             ],
           ),
