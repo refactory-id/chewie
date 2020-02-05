@@ -5,6 +5,7 @@ import 'package:chewie/src/chewie_progress_colors.dart';
 import 'package:chewie/src/material_progress_bar.dart';
 import 'package:chewie/src/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 class MaterialControls extends StatefulWidget {
@@ -59,6 +60,7 @@ class _MaterialControlsState extends State<MaterialControls> {
           absorbing: _hideStuff,
           child: Column(
             children: <Widget>[
+              _buildTopBar(),
               _latestValue != null &&
                           !_latestValue.isPlaying &&
                           _latestValue.duration == null ||
@@ -157,6 +159,54 @@ class _MaterialControlsState extends State<MaterialControls> {
         ),
       ),
     );
+  }
+  //our top bar
+  Widget _buildTopBar(
+      // Color backgroundColor,
+      // Color iconColor,
+      // double barHeight,
+      // double buttonPadding,
+      ) {
+    return Container(
+      height: barHeight,
+      margin: EdgeInsets.only(
+        top: marginSize,
+        right: marginSize,
+        left: marginSize,
+      ),
+      child: AnimatedOpacity(
+        opacity: _hideStuff ? 0.0 : 1.0,
+        duration: Duration(milliseconds: 300),
+        child: Container(
+          height: barHeight,
+          margin: EdgeInsets.only(right: 12.0),
+          padding: EdgeInsets.only(
+            left: 8.0,
+            right: 8.0,
+          ),
+          child: Row(
+            children: <Widget>[
+              SizedBox(width: MediaQuery.of(context).size.height * 0.1),
+              IconButton(
+                  icon: Icon(Icons.arrow_back_ios),
+                  color: Colors.white60,
+                  onPressed: exitAndBack),
+              Text(
+                chewieController.title,
+                style: TextStyle(color: Colors.white60, fontSize: 20),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void exitAndBack() {
+    Navigator.of(context).pushNamedAndRemoveUntil(chewieController.fromRoute,
+        ModalRoute.withName(chewieController.fromRoute));
+    Navigator.of(context).pop();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
 
   Expanded _buildHitArea() {
