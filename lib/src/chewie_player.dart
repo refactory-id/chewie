@@ -91,26 +91,26 @@ class ChewieState extends State<Chewie> {
         return Future<bool>.value(false);
       },
       child: Scaffold(
-        appBar: AppBar (
-        iconTheme: IconThemeData(
-            color: Color.fromRGBO(255, 255, 255, 1.0)),
-        actionsIconTheme: IconThemeData(
-            color: Color.fromRGBO(255, 255, 255, 1.0)),
-        automaticallyImplyLeading: true,
-        elevation: 0.1,
-        backgroundColor: Color.fromRGBO(0, 0, 0, 1.0),
-        title: Text(
-          widget.controller.title,
-          style: TextStyle(
-            fontFamily: "MMCOFFICE-Regular", fontWeight: FontWeight.w700),
-        ),
-        leading: IconButton(
-          onPressed: () {
-            exitAndBack();
-          },
-          icon: Icon(Icons.arrow_back),
-          ),
-        ),
+        // appBar: AppBar (
+        // iconTheme: IconThemeData(
+        //     color: Color.fromRGBO(255, 255, 255, 1.0)),
+        // actionsIconTheme: IconThemeData(
+        //     color: Color.fromRGBO(255, 255, 255, 1.0)),
+        // automaticallyImplyLeading: true,
+        // elevation: 0.1,
+        // backgroundColor: Color.fromRGBO(0, 0, 0, 1.0),
+        // title: Text(
+        //   widget.controller.title,
+        //   style: TextStyle(
+        //     fontFamily: "MMCOFFICE-Regular", fontWeight: FontWeight.w700),
+        // ),
+        // leading: IconButton(
+        //   onPressed: () {
+        //     exitAndBack();
+        //   },
+        //   icon: Icon(Icons.arrow_back),
+        //   ),
+        // ),
         resizeToAvoidBottomPadding: false,
         body: Container(
           alignment: Alignment.center,
