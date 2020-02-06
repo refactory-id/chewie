@@ -394,27 +394,31 @@ class _CupertinoControlsState extends State<CupertinoControls> {
         right: marginSize,
         left: marginSize,
       ),
-      child: Row(
-        children: <Widget>[
-          SizedBox(width: MediaQuery.of(context).size.height * 0.1),
-          IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              color: Colors.white70,
-              onPressed: exitAndBack),
-          Text(
-            chewieController.title,
-            style: TextStyle(color: Colors.white70, fontSize: 20),
-          )
-          // chewieController.allowFullScreen
-          //     ? _buildExpandButton(
-          //         backgroundColor, iconColor, barHeight, buttonPadding)
-          //     : Container(),
-          // Expanded(child: Container()),
-          // chewieController.allowMuting
-          //     ? _buildMuteButton(controller, backgroundColor, iconColor,
-          //         barHeight, buttonPadding)
-          //     : Container(),
-        ],
+      child: AnimatedOpacity(
+        opacity: _hideStuff ? 0.0 : 1.0,
+        duration: Duration(milliseconds: 300),
+        child: Row(
+          children: <Widget>[
+            SizedBox(width: MediaQuery.of(context).size.height * 0.1),
+            IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                color: Colors.white70,
+                onPressed: exitAndBack),
+            Text(
+              chewieController.title,
+              style: TextStyle(color: Colors.white70, fontSize: 20),
+            )
+            // chewieController.allowFullScreen
+            //     ? _buildExpandButton(
+            //         backgroundColor, iconColor, barHeight, buttonPadding)
+            //     : Container(),
+            // Expanded(child: Container()),
+            // chewieController.allowMuting
+            //     ? _buildMuteButton(controller, backgroundColor, iconColor,
+            //         barHeight, buttonPadding)
+            //     : Container(),
+          ],
+        ),
       ),
     );
   }
